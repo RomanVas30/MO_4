@@ -5,17 +5,16 @@
 #include "replacement.hpp"
 
 int main() {
-	setlocale(LC_CTYPE, "rus");
-	unsigned number = 0; 
+	unsigned number = 0;
 	bool end_of_the_program = false;
 	while (!end_of_the_program) {
-		std::cout << "Выберите номер задания: " << std::endl;
-		std::cout << "1. Составить вектор весов критериев и нормализовать его." << std::endl;
-		std::cout << "2. Замена критериев ограничениями." << std::endl;
-		std::cout << "3. Формирование и сужение множества Прето." << std::endl;
-		std::cout << "4. Взвешивание и объединение критериев." << std::endl;
-		std::cout << "5. Метод анализа иерархий." << std::endl;
-		std::cout << "0. Выйти." << std::endl;
+		std::cout << "Р’С‹Р±РµСЂРµС‚Рµ РЅРѕРјРµСЂ Р·Р°РґР°РЅРёСЏ: " << std::endl;
+		std::cout << "1.." << std::endl;
+		std::cout << "2.." << std::endl;
+		std::cout << "3.." << std::endl;
+		std::cout << "4.." << std::endl;
+		std::cout << "5.." << std::endl;
+		std::cout << "0.Р’С‹С…РѕРґ." << std::endl;
 		std::cin >> number;
 		switch (number)
 		{
@@ -25,7 +24,7 @@ int main() {
 		}break;
 		case 2: {
 			unsigned criterion;
-			std::cout << "Введите номер главного критерия: ";
+			std::cout << "Р’РІРµРґРёС‚Рµ РіР»Р°РІРЅС‹Р№ РєСЂРёС‚РµСЂРёР№ : ";
 			std::cin >> criterion;
 			Replacement replace;
 			replace.normalization(false);
@@ -40,9 +39,9 @@ int main() {
 		case 3: {
 			unsigned first;
 			unsigned second;
-			std::cout << "Введите первый критерий: ";
+			std::cout << "Р’РІРµРґРёС‚Рµ РїРµСЂРІС‹Р№ РєСЂРёС‚РµСЂРёР№: ";
 			std::cin >> first;
-			std::cout << "Введите второй критерий: ";
+			std::cout << "Р’РІРµРґРёС‚Рµ РІС‚РѕСЂРѕР№ РєСЂРёС‚РµСЂРёР№: ";
 			std::cin >> second;
 			Replacement replace;
 			replace.normalization(false);
@@ -62,6 +61,6 @@ int main() {
 			break;
 		}
 	}
-	std::cout << "До встречи:)" << std::endl;
+	std::cout << "Р”Рѕ СЃРІРёРґР°РЅРёСЏ:)" << std::endl;
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 }
