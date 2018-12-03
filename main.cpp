@@ -8,12 +8,12 @@ int main() {
 	unsigned number = 0;
 	bool end_of_the_program = false;
 	while (!end_of_the_program) {
-		std::cout << "Выберете номер задания: " << std::endl;
-		std::cout << "1.." << std::endl;
-		std::cout << "2.." << std::endl;
-		std::cout << "3.." << std::endl;
-		std::cout << "4.." << std::endl;
-		std::cout << "5.." << std::endl;
+		std::cout << "Выберете один вариант: " << std::endl;
+		std::cout << "1. Составление и нормальзация вектора весов." << std::endl;
+		std::cout << "2. Замена критериев ограничениями." << std::endl;
+		std::cout << "3. Формирование и сужение множества Парето." << std::endl;
+		std::cout << "4. Метод взвешивания и объединения критериев." << std::endl;
+		std::cout << "5. Метод анализа иерархий." << std::endl;
 		std::cout << "0.Выход." << std::endl;
 		std::cin >> number;
 		switch (number)
@@ -51,7 +51,7 @@ int main() {
 		case 4: {
 			Replacement replace;
 			replace.normalization(false);
-			replace.union_value();
+			replace.union_value(true);
 		}break;
 		case 5: {
 

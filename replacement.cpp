@@ -50,15 +50,19 @@ void Replacement::acceptable_alternatives(unsigned best_criterion) {
 		if (valid) suitable_alternatives.push_back(i);
 		valid = true;
 	}
-	//if (suitable_alternatives.size() == 0) throw std::runtime_error{ "!" };
+	if (suitable_alternatives.size() == 0) throw std::runtime_error{ "!" };
 	print_alternatives(best_criterion);
 }
 
 void Replacement::print_alternatives(unsigned best_criterion) {
-	std::cout << ": " << std::endl;
+	std::cout << "Приемлемые альтернативы: " << std::endl;
 	for (unsigned i = 0; i < suitable_alternatives.size(); ++i)
 		std::cout << suitable_alternatives[i] + 1 << " ";
 	std::cout << std::endl;
+	/*union_value(false);
+	std::cout << "Объединенные критерии альтернатив: " << std::endl;
+	for (unsigned i = 0; i < marks.size(); ++i)
+		std::cout << marks[i] << std::endl;*/
 	unsigned max_value = table[suitable_alternatives[0]][best_criterion];
 	unsigned max_criterion = suitable_alternatives[0];
 	for (unsigned i = 1; i < suitable_alternatives.size(); ++i)
@@ -66,7 +70,7 @@ void Replacement::print_alternatives(unsigned best_criterion) {
 			max_value = table[suitable_alternatives[i]][best_criterion];
 			max_criterion = suitable_alternatives[i];
 		}
-	std::cout << ": " << max_criterion + 1 << std::endl;
+	std::cout << "Лучшая альтернатива: " << max_criterion + 1 << std::endl;
 
 }
 
@@ -84,11 +88,17 @@ void Replacement::print_Pareto(unsigned first, unsigned second) {
 	for (unsigned i = 0; i < alternatives; ++i) {
 		distance_x = point_utopia_x - table[i][first];
 		distance_y = point_utopia_y - table[i][second];
-		std::cout << " " << i + 1 << "-ой: " << (abs(distance_x) + abs(distance_y)) << std::endl;
+		suitable_alternatives.push_back(abs(distance_x) + abs(distance_y));
+		std::cout << "Расстояние по Манхеттену до " << i + 1 << "-ой альтернативы: " << suitable_alternatives[i] << std::endl;
 	}
+	unsigned min_distance = suitable_alternatives[0];
+	for (unsigned i = 0; i < alternatives; ++i)
+		if (min_distance > suitable_alternatives[i])
+			min_distance = suitable_alternatives[i];
+	std::cout << "Оптимальная альтернатива по Парето: " << min_distance << std::endl;
 }
 
-void Replacement::union_value() {
+void Replacement::union_value(bool number) {
 	norm_table = new double*[alternatives];
 	for (unsigned i = 0; i < alternatives; i++)
 		norm_table[i] = new double[criterions];
@@ -110,7 +120,15 @@ void Replacement::union_value() {
 		for (unsigned j = 0; j < criterions; ++j)
 			marks[i] += norm_table[i][j] * expert_marks[j];
 	}
+	for (unsigned i = 0; i < alternatives; ++i)
+			delete[] norm_table[i];
+		delete[] norm_table;
+	if (number)
+	print_union_value();
+}
+
+void Replacement::print_union_value() {
 	for (unsigned i = 0; i < alternatives; ++i) {
-			std::cout << marks[i] << " ";
+			std::cout << marks[i] << std::endl;
 	}
 }

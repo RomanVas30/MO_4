@@ -11,7 +11,7 @@ public:
 	void normalization(bool);
 	void acceptable_alternatives(unsigned criterion);
 	void print_Pareto(unsigned, unsigned);
-	void union_value();
+	void union_value(bool);
 	std::ifstream file;
 	~Replacement() {
 		file.close();
@@ -29,5 +29,6 @@ private:
 	unsigned alternatives;
 	unsigned criterions;
 	void input_value();
+	void print_union_value();
 	void print_alternatives(unsigned);
 };
